@@ -54,9 +54,7 @@ class UsuarioController {
           .json({ error: 'Já existe uma conta vinculada a este e-mail' });
       }
 
-      const { _id, nome, foto, celular, email } = await Usuario.create(
-        req.body
-      );
+      const { _id, nome, email } = await Usuario.create(req.body);
 
       return res.status(201).json({
         usuario: {

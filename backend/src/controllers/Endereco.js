@@ -1,7 +1,7 @@
 import axios from 'axios';
 import Endereco from '../views/Endereco';
 import 'dotenv/config';
-// import { isEmpty } from '../helpers/funcoes';
+import { isNotEmpty } from '../helpers/funcoes';
 
 class EnderecoController {
   async show(req, res) {
@@ -14,13 +14,15 @@ class EnderecoController {
     });
 
     try {
-      const { bairro, cep, cidade, uf, endereco, ibge } = await api.get(
-        `https://webmaniabr.com/api/1/cep/${req.params.cep}/?app_key=${process.env.APP_KEY_API}&app_secret=${process.env.APP_SECRET_API}`
-      );
+      const { bairro, cep, cidade, uf, endereco, ibge, error } = await api
+        .get(
+          `https://webmaniabr.com/api/1/cep/${req.params.cep}/?app_key=${process.env.APP_KEY_API}&app_secret=${process.env.APP_SECRET_API}`
+        )
+        .then(response => response.data);
 
-      // if (isEmpty(end)) {
-      //   return res.status(404).json();
-      // }
+      if (isNotEmpty(error)) {
+        return res.status(404).json({ error });
+      }
 
       const localidade = new Endereco(bairro, cep, cidade, uf, endereco, ibge);
 
