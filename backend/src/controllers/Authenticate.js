@@ -43,7 +43,7 @@ class AuthenticateController {
 
       usuario.senha = undefined;
 
-      const { _id, nome, foto, celular } = usuario;
+      const { _id, nome } = usuario;
 
       return res.json({
         usuario: {

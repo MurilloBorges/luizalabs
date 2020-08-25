@@ -1,11 +1,22 @@
 import Endereco from '../views/Endereco';
-import { isNotEmpty } from '../helpers/funcoes';
+import { isNotEmpty, replaceAt } from '../helpers/funcoes';
 
 class EnderecoController {
   async show(req, res) {
-    const { cep } = req.params;
+    let cep = req.params.cep.replace(/\D/g, '');
     try {
       await Endereco.getEndereco(cep);
+
+      if (isNotEmpty(Endereco.error)) {
+        let cont = 7;
+        do {
+          Endereco.initial();
+          cep = replaceAt(cep, cont, '0');
+          cont -= 1;
+          // eslint-disable-next-line no-await-in-loop
+          await Endereco.getEndereco(cep);
+        } while (isNotEmpty(Endereco.error) && cont >= 0);
+      }
 
       if (isNotEmpty(Endereco.error)) {
         return res.status(404).json({ error: Endereco.error });
