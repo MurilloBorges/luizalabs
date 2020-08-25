@@ -1,34 +1,21 @@
-import axios from 'axios';
 import Endereco from '../views/Endereco';
-import 'dotenv/config';
 import { isNotEmpty } from '../helpers/funcoes';
 
 class EnderecoController {
   async show(req, res) {
-    const api = axios.create({
-      responseType: 'json',
-      headers: {
-        Accept: 'application/json',
-        ContentType: 'application/json',
-      },
-    });
-
+    const { cep } = req.params;
     try {
-      const { bairro, cep, cidade, uf, endereco, ibge, error } = await api
-        .get(
-          `https://webmaniabr.com/api/1/cep/${req.params.cep}/?app_key=${process.env.APP_KEY_API}&app_secret=${process.env.APP_SECRET_API}`
-        )
-        .then(response => response.data);
+      await Endereco.getEndereco(cep);
 
-      if (isNotEmpty(error)) {
-        return res.status(404).json({ error });
+      if (isNotEmpty(Endereco.error)) {
+        return res.status(404).json({ error: Endereco.error });
       }
 
-      const localidade = new Endereco(bairro, cep, cidade, uf, endereco, ibge);
-
-      return res.json(localidade);
+      return res.json(Endereco.endereco);
     } catch (error) {
       return res.status(500).json({ error });
+    } finally {
+      Endereco.initial();
     }
   }
 }

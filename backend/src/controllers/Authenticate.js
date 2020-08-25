@@ -11,7 +11,7 @@ export function generateToken(params = {}) {
   });
 }
 
-class Authenticate {
+class AuthenticateController {
   async store(req, res) {
     try {
       const schema = Yup.object().shape({
@@ -59,4 +59,4 @@ class Authenticate {
   }
 }
 
-export default new Authenticate();
+export default new AuthenticateController();
