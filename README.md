@@ -1,29 +1,29 @@
 # luizalabs
 Expor um serviço de BUSCA DE CEP
 
-Eu, como usuário, quero informar meu CEP e obter o nome da minha RUA, BAIRRO, CIDADE e ESTADO para preencher meus dados de cadastro de forma automática.
+Com esta aplicação irei informar meu CEP e obter o nome da minha RUA, BAIRRO, CIDADE e ESTADO para preencher meus dados de cadastro de forma automática.
 
 
 # Tecnologias utilizadas
-- Para o backend será utilizada a linguagem Node js;
+- Para o backend foi utilizado a linguagem NodeJS;
 
-- Para o banco de dados onde será armazenado os usuários da aplicação será utilizado o MongoDB;
+- Para o banco de dados onde será armazenado os usuários da aplicação foi utilizado o MongoDB;
 
-- Para o frontend será utilizada a linguagem React js;
+- Para o frontend foi utilizado a linguagem ReactJS;
 
-- Para os testes automaizados será utilizada o framework cypress;
+- Para os testes automaizados foi utilizado o framework cypress;
 
-- Para documentação da API, será utilizado o swagger;
+- Para documentação da API, foi utilizado o swagger;
 
 
-# Por que Node js e não Java ?
+# Por que NodeJS e não Java ?
 1. Praticidade, agilidade, e facilidade de implementação;
 
 2. A aplicação desenvolvida não exige um controle transacional e um backend robusto;
 
-3. Poucas funcionalidade a serem implementadas;
+3. Poucas funcionalidades a serem implementadas;
 
-4. Melhor performance para busca de dados;
+4. Melhor performance para busca de dados, já que NodeJS transita json por padrão;
 
 
 # Estratégia utilizada
@@ -39,4 +39,6 @@ Eu, como usuário, quero informar meu CEP e obter o nome da minha RUA, BAIRRO, C
 
 - > PATCH -> altera os dados do usuário (exige autenticação);
 
-- Os usuários da aplicação é armazenado no banco de dados MongoDB;
+- Os usuários da aplicação são armazenados no banco de dados MongoDB;
+
+- Implementado método de busca cep (exige autenticação);
