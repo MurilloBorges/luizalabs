@@ -25,6 +25,8 @@ Com esta aplicação irei informar meu CEP e obter o nome da minha RUA, BAIRRO, 
 
 4. Melhor performance para busca de dados, já que NodeJS transita json por padrão;
 
+5. Melhor facilidade de manutenção do código pois existem mais profissionais familiarizados com o javascript/typescript;
+
 
 # Estratégia utilizada
 - A autenticação na api é realizada via token jwt, que é gerado ao realizar login na aplicação;
