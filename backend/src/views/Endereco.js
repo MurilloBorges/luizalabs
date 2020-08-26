@@ -8,14 +8,17 @@ class Endereco {
   async getEndereco(value) {
     try {
       const response = await cep(value);
-      this.endereco = response;
+      this.endereco = {
+        ...this.endereco,
+        ...response,
+      };
     } catch (error) {
       if (
         error.errors.filter(e => e.message.includes('CEP INVÁLIDO')).length >= 1
       ) {
-        throw error;
+        this.invalid = true;
       } else {
-        this.error = 'CEP não encontrado';
+        this.notFound = true;
       }
     }
   }
@@ -28,7 +31,8 @@ class Endereco {
       neighborhood: '',
       street: '',
     };
-    this.error = '';
+    this.notFound = false;
+    this.invalid = false;
   }
 }
 

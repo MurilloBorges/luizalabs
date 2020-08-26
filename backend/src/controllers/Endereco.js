@@ -1,25 +1,43 @@
 import Endereco from '../views/Endereco';
-import { isNotEmpty, replaceAt } from '../helpers/funcoes';
+import { replaceAt } from '../helpers/funcoes';
 
 class EnderecoController {
   async show(req, res) {
     let cep = req.params.cep.replace(/\D/g, '');
     try {
-      await Endereco.getEndereco(cep);
+      if (cep.length !== 8) {
+        return res.status(400).json({
+          cep,
+          error: 'CEP inválido',
+        });
+      }
 
-      if (isNotEmpty(Endereco.error)) {
-        let cont = 7;
-        do {
+      let cont = 7;
+      do {
+        if (Endereco.notFound) {
           Endereco.initial();
           cep = replaceAt(cep, cont, '0');
           cont -= 1;
-          // eslint-disable-next-line no-await-in-loop
-          await Endereco.getEndereco(cep);
-        } while (isNotEmpty(Endereco.error) && cont >= 0);
+        }
+
+        // eslint-disable-next-line no-await-in-loop
+        await Endereco.getEndereco(cep);
+
+        console.log('notfound', Endereco.notFound, cep);
+      } while (Endereco.notFound && cont >= 0);
+
+      if (Endereco.notFound) {
+        return res.status(404).json({
+          cep,
+          error: 'CEP não encontrado',
+        });
       }
 
-      if (isNotEmpty(Endereco.error)) {
-        return res.status(404).json({ error: Endereco.error });
+      if (Endereco.invalid) {
+        return res.status(400).json({
+          cep,
+          error: 'CEP inválido',
+        });
       }
 
       return res.json(Endereco.endereco);
