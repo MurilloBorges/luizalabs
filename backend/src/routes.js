@@ -16,6 +16,6 @@ routes.use(authMiddleware);
 
 routes.delete('/usuarios/:id', Usuario.delete);
 routes.patch('/usuarios/:id', Usuario.update);
-routes.get('/cep/:cep', Endereco.show);
+routes.get('/ceps/:cep', Endereco.show);
 
 export default routes;
