@@ -7,6 +7,7 @@ import morgan from 'morgan';
 import logger from './middlewares/logger';
 import routes from './routes';
 import './database';
+import { swaggerUi, swaggerDocs } from './middlewares/swagger';
 
 class App {
   constructor() {
@@ -29,6 +30,8 @@ class App {
         { stream: logger.stream }
       )
     );
+
+    this.server.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
   }
 
   routes() {
