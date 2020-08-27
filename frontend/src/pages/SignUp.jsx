@@ -34,10 +34,13 @@ export default function SignUp({ history }) {
         email: signUp.email,
         senha: signUp.senha
       }).then((res) => {
+        toast.success('Usuário cadastrado com sucesso!');
         login(res.data.token);
         history.push('/busca-cep');
       }).catch((error) => {
-        toast.error('Usuário ou Senha Inválido.');
+        if (error.response.status === 400) {
+          toast.info(error.response.data.error);
+        }
       });
     } catch (e) {
       toast.error(`Falha na requisição: ${e}`);

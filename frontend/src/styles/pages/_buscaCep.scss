@@ -1,0 +1,76 @@
+.operacoes-produto-container {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  h1 {
+    align-self: flex-start;
+    margin: 10px 0 0 0;
+  }
+  hr {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    border: 0;
+    border-top: 2px solid #eee;
+  }
+  form {
+    width: 60%;
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    padding: 20px;
+    input {
+      margin-top: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      height: 48px;
+      padding: 0 20px;
+      font-size: 16px;
+      color: #666;
+      &::placeholder {
+        color: #999;
+      }
+    }
+    button {
+      margin-top: 10px;
+      border: 0;
+      border-radius: 4px;
+      height: 48px;
+      font-size: 16px;
+      font-weight: bold;
+      color: #fff;
+      cursor: pointer;
+      padding: 0 20px 0 20px;
+    }
+    a {
+      margin-top: 10px;
+      border: 0;
+      border-radius: 4px;
+      height: 48px;
+      font-size: 16px;
+      font-weight: bold;
+      color: #fff;
+      cursor: pointer;
+      padding: 12px 20px 0 20px;
+    }
+  }
+  #salvar {
+    background: #07bc0c;
+    margin: 20px 0 0 20px;
+  }
+  #cancelar {
+    background: #e74c3c;
+    margin: 20px 0 0 0;
+  }
+  h4 {
+    margin-top: 15px;
+  }
+  #deslogar {
+    background: #3498db;
+    width: 100px;
+    align-self: flex-end;
+    margin: -20px -20px 10px 0px;
+  }
+}

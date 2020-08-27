@@ -4,7 +4,6 @@ import IconSVG from '../components/Ui/IconSVG';
 import api from '../services/api';
 import { login } from '../services/authentication';
 import { isEmpty } from '../helpers/funcoes';
-import { Redirect } from 'react-router-dom';
 
 export default function Login({ history }) {
   const [authenticate, setAuthenticate] = useState({
@@ -26,14 +25,16 @@ export default function Login({ history }) {
   async function handleSubmit(e) {
     e.preventDefault();
     if (isEmpty(authenticate.email) || isEmpty(authenticate.senha)) {
-      return toast.error('Preencha e-mail e senha para continuar.');
+      return toast.error('Preencha o e-mail e a senha para continuar.');
     }
     try {
       await api.post('/authenticate', { email: authenticate.email, senha: authenticate.senha }).then((res) => {
         login(res.data.token);
         history.push('/busca-cep');
       }).catch((error) => {
-        toast.error('Usuário ou Senha Inválido.');
+        if ([400, 404].includes(error.response.status)) {
+          toast.info(error.response.data.error);
+        }        
       });
     } catch (e) {
       toast.error(`Falha na requisição: ${e}`);

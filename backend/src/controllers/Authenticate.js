@@ -34,7 +34,7 @@ class AuthenticateController {
       const usuario = await Usuario.findOne({ email }).select('+senha');
 
       if (!usuario) {
-        return res.status(404).json();
+        return res.status(404).json({ error: 'Usuário não cadastrado' });
       }
 
       if (senha && !(await bcrypt.compare(senha, usuario.senha))) {

@@ -19,7 +19,7 @@ class UsuarioController {
       const usuario = await Usuario.findById(req.params.id);
 
       if (isEmpty(usuario)) {
-        return res.status(404).json();
+        return res.status(404).json({ error: 'Usuário não cadastrado' });
       }
 
       return res.json(usuario);
@@ -95,7 +95,7 @@ class UsuarioController {
       const usuario = await Usuario.findById(req.params.id).select('+senha');
 
       if (isEmpty(usuario)) {
-        return res.status(404).json();
+        return res.status(404).json({ error: 'Usuário não cadastrado' });
       }
 
       if (senhaAntiga && !(await bcrypt.compare(senhaAntiga, usuario.senha))) {
@@ -118,7 +118,7 @@ class UsuarioController {
       const usuario = await Usuario.findByIdAndDelete(req.params.id);
 
       if (isEmpty(usuario)) {
-        return res.status(404).json();
+        return res.status(404).json({ error: 'Usuário não cadastrado' });
       }
 
       return res.status(204).json();
