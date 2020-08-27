@@ -16,7 +16,6 @@ const swaggerOptions = {
         name: 'Apache 2.0',
         url: 'http://www.apache.org/licenses/LICENSE-2.0.html',
       },
-      servers: ['http://localhost:3333'],
     },
     host: 'localhost:3333',
     schemes: ['http'],
@@ -137,12 +136,8 @@ const swaggerOptions = {
           responses: {
             200: {
               description: 'users were obtained',
-              content: {
-                'application/json': {
-                  schema: {
-                    $ref: '#/definitions/Users',
-                  },
-                },
+              schema: {
+                $ref: '#/definitions/Users',
               },
             },
             500: {
@@ -172,12 +167,8 @@ const swaggerOptions = {
           responses: {
             200: {
               description: 'address obtained by zip code',
-              content: {
-                'application/json': {
-                  schema: {
-                    $ref: '#/definitions/CEP',
-                  },
-                },
+              schema: {
+                $ref: '#/definitions/CEP',
               },
             },
             404: {
@@ -280,7 +271,7 @@ const swaggerOptions = {
           },
         },
       },
-      '/ceps': {
+      '/ceps/{cep}': {
         get: {
           tags: ['CEP'],
           summary: 'searches CEP',
@@ -301,7 +292,6 @@ const swaggerOptions = {
             200: {
               description: 'search results matching criteria',
               schema: {
-                type: 'object',
                 $ref: '#/definitions/CEP',
               },
             },
@@ -362,7 +352,7 @@ const swaggerOptions = {
           senha: {
             $ref: '#/schemas/user/senha',
           },
-        }
+        },
       },
       User: {
         type: 'object',
