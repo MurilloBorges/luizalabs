@@ -31,19 +31,20 @@ Com esta aplicação irei informar meu CEP e obter o nome da minha RUA, BAIRRO, 
 # Estratégia utilizada
 - A autenticação na api é realizada via token jwt, que é gerado ao realizar login na aplicação;
 - Implementada collection de usuário contendo os métodos:
-- > GET by id -> busca o usuário pelo id (não exige autenticação);
+> - GET by id -> busca o usuário pelo id (não exige autenticação);
 
-- > GET all -> busca todos os usuários (não exige autenticação);
+> - GET all -> busca todos os usuários (não exige autenticação);
 
-- > POST -> insere um usuário (não exige autenticação);
+> - POST -> insere um usuário (não exige autenticação);
 
-- > DELETE -> exclui o usuário (exige autenticação);
+> - DELETE -> exclui o usuário (exige autenticação);
 
-- > PATCH -> altera os dados do usuário (exige autenticação);
+> - PATCH -> altera os dados do usuário (exige autenticação);
 
 - Os usuários da aplicação são armazenados no banco de dados MongoDB;
 
 - Implementado método de busca cep (exige autenticação);
+
 
 
 # Requisitos para a execução do projeto
@@ -53,10 +54,12 @@ Com esta aplicação irei informar meu CEP e obter o nome da minha RUA, BAIRRO, 
 - Ter o gerenciador de dependências yarn instalado (npm também funciona, porém recomendo fortemente o yarn)
 > [Instalando o yarn](https://classic.yarnpkg.com/pt-BR/docs/install/#debian-stable "Clique aqui para aprender a instalar o yarn!")
 
+
 ## Documentação da API offline
 > [Documentação da API offline](https://app.swaggerhub.com/apis/MurilloBorges/search-cep_api/1.0.0 "Clique aqui para ver a documentação!")
 
-# Executando o projeto
+
+## Executando o projeto
 1. Acessar a pasta backend e executar os seguintes comandos:
 > yarn install
 
