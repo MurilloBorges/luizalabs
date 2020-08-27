@@ -23,8 +23,21 @@ const swaggerOptions = {
     basePath: '/',
     responses: {},
     parameters: {},
-    securityDefinitions: {},
+    securityDefinitions: {
+      bearerAuth: {
+        type: 'apiKey',
+        name: 'Authorization',
+        scheme: 'bearer',
+        bearerFormat: 'JWT',
+        in: 'header',
+      },
+    },
     tags: [
+      {
+        name: 'Authenticate',
+        description:
+          'User authentication in the api, to generate the jwt token bearer',
+      },
       {
         name: 'Users',
         description: 'User collection',
@@ -35,22 +48,70 @@ const swaggerOptions = {
       },
     ],
     paths: {
+      '/authenticate': {
+        post: {
+          tags: ['Authenticate'],
+          summary: 'user authentication',
+          operationId: 'userAuthentication',
+          description: 'Here you can authenticate your user in the system',
+          produces: ['application/json'],
+          consumes: ['application/json'],
+          parameters: [
+            {
+              in: 'body',
+              name: 'user',
+              description: 'user to authentication',
+              required: true,
+              schema: {
+                $ref: '#/definitions/Authenticate',
+              },
+            },
+          ],
+          responses: {
+            200: {
+              description: 'user autenticated',
+            },
+            400: {
+              description: 'object invalid || invalid password',
+            },
+            404: {
+              description: 'user not found',
+            },
+            500: {
+              description:
+                'internal server error when trying to user authentication',
+            },
+          },
+        },
+      },
       '/usuarios': {
         post: {
           tags: ['Users'],
           summary: 'insert user',
           operationId: 'insertUser',
           description: 'Here you can register a new user in the system',
-          produces: ['application / json'],
-          consumes: ['application / json'],
+          produces: ['application/json'],
+          consumes: ['application/json'],
           parameters: [
             {
               in: 'body',
               name: 'user',
               description: 'user to add',
-              required: false,
+              required: true,
               schema: {
-                $ref: '#/definitions/User',
+                type: 'object',
+                required: ['nome', 'email', 'senha'],
+                properties: {
+                  nome: {
+                    $ref: '#/schemas/user/nome',
+                  },
+                  email: {
+                    $ref: '#/schemas/user/email',
+                  },
+                  senha: {
+                    $ref: '#/schemas/user/senha',
+                  },
+                },
               },
             },
           ],
@@ -59,7 +120,7 @@ const swaggerOptions = {
               description: 'user created',
             },
             400: {
-              description: 'invalid input, object invalid || existing user ',
+              description: 'object invalid || existing user',
             },
             500: {
               description: 'internal server error when trying to create user',
@@ -72,10 +133,10 @@ const swaggerOptions = {
           operationId: 'searchUsers',
           description:
             'When making a request, you can get all users registered in the system',
-          produces: ['application / json'],
+          produces: ['application/json'],
           responses: {
             200: {
-              description: 'Users were obtained',
+              description: 'users were obtained',
               content: {
                 'application/json': {
                   schema: {
@@ -83,6 +144,10 @@ const swaggerOptions = {
                   },
                 },
               },
+            },
+            500: {
+              description:
+                'internal server error when trying to searches users',
             },
           },
         },
@@ -94,7 +159,34 @@ const swaggerOptions = {
           operationId: 'searchUser',
           description:
             'By passing a valid ID, you can obtain the corresponding user',
-          produces: ['application / json'],
+          produces: ['application/json'],
+          parameters: [
+            {
+              name: 'id',
+              in: 'path',
+              description: 'user id',
+              required: true,
+              type: 'string',
+            },
+          ],
+          responses: {
+            200: {
+              description: 'address obtained by zip code',
+              content: {
+                'application/json': {
+                  schema: {
+                    $ref: '#/definitions/CEP',
+                  },
+                },
+              },
+            },
+            404: {
+              description: 'user not found',
+            },
+            500: {
+              description: 'internal server error when trying to searche user',
+            },
+          },
         },
         patch: {
           tags: ['Users'],
@@ -102,8 +194,59 @@ const swaggerOptions = {
           operationId: 'changeUser',
           description:
             'By passing a valid ID, you can change the corresponding user',
-          produces: ['application / json'],
-          consumes: ['application / json'],
+          produces: ['application/json'],
+          consumes: ['application/json'],
+          parameters: [
+            {
+              name: 'id',
+              in: 'path',
+              description: 'user id',
+              required: true,
+              type: 'string',
+            },
+            {
+              in: 'body',
+              name: 'user',
+              description: 'user to change',
+              required: true,
+              schema: {
+                type: 'object',
+                required: ['nome', 'email', 'senha'],
+                properties: {
+                  nome: {
+                    $ref: '#/schemas/user/nome',
+                  },
+                  senhaAntiga: {
+                    $ref: '#/schemas/user/senha',
+                  },
+                  senha: {
+                    $ref: '#/schemas/user/novaSenha',
+                  },
+                  senhaConfirmacao: {
+                    $ref: '#/schemas/user/novaSenha',
+                  },
+                },
+              },
+            },
+          ],
+          responses: {
+            204: {
+              description: 'changed user',
+            },
+            400: {
+              description:
+                'invalid input path || object invalid || passwords do not match',
+            },
+            401: {
+              description: 'unauthorized',
+            },
+            404: {
+              description: 'user not found',
+            },
+            500: {
+              description: 'internal server error when trying to change user',
+            },
+          },
         },
         delete: {
           tags: ['Users'],
@@ -111,7 +254,30 @@ const swaggerOptions = {
           operationId: 'deleteUser',
           description:
             'By passing a valid ID, you can delete the corresponding user',
-          produces: ['application / json'],
+          produces: ['application/json'],
+          parameters: [
+            {
+              name: 'id',
+              in: 'path',
+              description: 'user id',
+              required: true,
+              type: 'string',
+            },
+          ],
+          responses: {
+            204: {
+              description: 'deleted user',
+            },
+            401: {
+              description: 'unauthorized',
+            },
+            404: {
+              description: 'user not found',
+            },
+            500: {
+              description: 'internal server error when trying to delete user',
+            },
+          },
         },
       },
       '/ceps': {
@@ -121,65 +287,85 @@ const swaggerOptions = {
           operationId: 'searchCEP',
           description:
             'When you pass a valid zip code, you can obtain the corresponding address',
-          produces: ['application / json'],
-          // parameters: {
-          //   - in: query
-          //   name: searchString
-          //   description: pass an optional search string for looking up inventory
-          //   required: false
-          //   type: string
-          //   - in: query
-          //   name: skip
-          //   description: number of records to skip for pagination
-          //   type: integer
-          //   format: int32
-          //   minimum: 0
-          //   - in: query
-          //   name: limit
-          //   description: maximum number of records to return
-          //   type: integer
-          //   format: int32
-          //   minimum: 0
-          //   maximum: 50
-          // }
+          produces: ['application/json'],
+          parameters: [
+            {
+              name: 'cep',
+              in: 'path',
+              description: 'cep',
+              required: true,
+              type: 'string',
+            },
+          ],
           responses: {
             200: {
               description: 'search results matching criteria',
               schema: {
-                type: 'array',
-                items: {
-                  $ref: '#/definitions/CEP',
-                },
+                type: 'object',
+                $ref: '#/definitions/CEP',
               },
             },
             400: {
-              description: 'bad input parameter',
-              // content: 'application/json',
-              // schema: {
-              //   $ref: '#/definitions/CEPError',
-              // },
+              description: 'invalid input path || invalid CEP',
               schema: {
-                cep: '999999',
-                error: 'CEP inválido',
+                type: 'object',
+                properties: {
+                  cep: {
+                    type: 'string',
+                    description: 'postal code',
+                    example: '150415',
+                  },
+                  error: {
+                    type: 'string',
+                    description: 'message',
+                    example: 'CEP inválido',
+                  },
+                },
               },
             },
             401: {
-              description: 'Unauthorized',
+              description: 'unauthorized',
             },
             404: {
               description: 'CEP not found',
+              schema: {
+                type: 'object',
+                properties: {
+                  cep: {
+                    type: 'string',
+                    description: 'postal code',
+                    example: '10000002',
+                  },
+                  error: {
+                    type: 'string',
+                    description: 'message',
+                    example: 'CEP não encontrado',
+                  },
+                },
+              },
             },
             500: {
-              description: 'internal server error',
+              description: 'internal server error when trying to query zip',
             },
           },
         },
       },
     },
     definitions: {
+      Authenticate: {
+        type: 'object',
+        required: ['email', 'senha'],
+        properties: {
+          email: {
+            $ref: '#/schemas/user/email',
+          },
+          senha: {
+            $ref: '#/schemas/user/senha',
+          },
+        }
+      },
       User: {
         type: 'object',
-        required: ['nome', 'email'],
         properties: {
           _id: {
             $ref: '#/schemas/user/_id',
@@ -189,6 +375,9 @@ const swaggerOptions = {
           },
           email: {
             $ref: '#/schemas/user/email',
+          },
+          senha: {
+            $ref: '#/schemas/user/senha',
           },
           createdAt: {
             $ref: '#/schemas/user/createdAt',
@@ -264,6 +453,11 @@ const swaggerOptions = {
         senha: {
           type: 'string',
           description: 'user password for authentication',
+          example: '123456',
+        },
+        novaSenha: {
+          type: 'string',
+          description: 'new user password for authentication',
           example: 'd290f1ee',
         },
       },
