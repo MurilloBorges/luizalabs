@@ -46,35 +46,35 @@ Com esta aplicação irei informar meu CEP e obter o nome da minha RUA, BAIRRO, 
 - Implementado método de busca cep (exige autenticação);
 
 #### Para a arquitetura do projeto foi utilizado o seguinte contexto de pastas:
-> luizalabs (pasta pai de todo o projeto)
+> **luizalabs** (pasta pai de todo o projeto)
 
-> > backend (pasta pai do backend)
+> > **backend** (pasta pai do backend)
 
-> > > node_modules (pasta onde contém todas bibliotecas e dependências instaladas e utilizadas no projeto)
+> > > **node_modules** (pasta onde contém todas bibliotecas e dependências instaladas e utilizadas no projeto)
 
-> > > logs (pasta onde contém o log de todas as requisições feitas para a api)
+> > > **logs** (pasta onde contém o log de todas as requisições feitas para a api)
 
-> > > src (pasta onde contém a arquitetura da api)
+> > > **src** (pasta onde contém a arquitetura da api)
 
-> > > > middlewares
+> > > > **middlewares** (contém os middlewares da aplicação com o logger para log das requisições da api, swagger para documentaço, auth para validação de token jwt válido)
 
-> > > > views
+> > > > **views** (contém as views da aplicação como endereço que retorna o modelo "json padrão" de endereço para retorno no response da requisição de cep para status 200)
 
-> > > > controllers
+> > > > **controllers** (contém os controllers da aplicação ou seja onde fica toda regra de negócio para cada método/endpoint a ser consumido/publicado, isso inclui tratativas de erros, lógica de negócio, regras, e define a resposta e status do response a ser encaminhada para o client)
 
-> > > > models
+> > > > **models** (contém os modelos/estruturas dos objetos que teram vinculo e serão armazenados no banco de dados, exmplo model de usuário, contém a definiçao dos campos requiridos, tipagem, tamanho, e também regras como não trazer a senha do usuário do banco de dados e criptografar a mesma antes de ser inserida na base)
 
-> > > > helpers
+> > > > **helpers** (contém funções auxiliares que serão utilizadas em diversos lugares da aplicação, exemplo isNotEmpty que valida se um valor não é indefinido, nulo ou vazio)
 
-> > > > database
+> > > > **database** (contém a classe que instancia as configurações de conexão com o banco de dados e export um objeto de conexão criado e pronto para uso)
 
-> > > > config
+> > > > **config** (contém arquivos de configuração da aplicação, como database onde fica toda configuração de conexão com o banco de dados e auth onde fica o segredo para geração do token jwt e o tempo de expiração)
 
-> > > > routes.js
+> > > > **routes.js** (define as rotas da api e também a partir de qual rota o token jwt é obrigatório)
 
-> > > > app.js
+> > > > **app.js** (define toda configuração e funcionalidades que o server utilizara para rodar a aplicação, sendo isso, express, middlewares, cors, routes, e instancia um server novo)
 
-> > > > server.js
+> > > > **server.js** (define a porta em que a aplicação será executada e mais algumas funcionalidades)
 
 
 
