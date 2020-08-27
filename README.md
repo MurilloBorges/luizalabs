@@ -44,3 +44,37 @@ Com esta aplicação irei informar meu CEP e obter o nome da minha RUA, BAIRRO, 
 - Os usuários da aplicação são armazenados no banco de dados MongoDB;
 
 - Implementado método de busca cep (exige autenticação);
+
+
+# Requisitos para a execução do projeto
+- Ter o NodeJS instalado de preferência a última versão ou superior a v12.16.1;
+> [Instalando o Node](https://nodejs.org/pt-br/download/package-manager/ "Clique aqui para aprender a instalar o Node!")
+
+- Ter o gerenciador de dependências yarn instalado (npm também funciona, porém recomendo fortemente o yarn)
+> [Instalando o yarn](https://classic.yarnpkg.com/pt-BR/docs/install/#debian-stable "Clique aqui para aprender a instalar o yarn!")
+
+## Documentação da API offline
+> [Documentação da API offline](https://app.swaggerhub.com/apis/MurilloBorges/search-cep_api/1.0.0 "Clique aqui para ver a documentação!")
+
+# Executando o projeto
+1. Acessar a pasta backend e executar os seguintes comandos:
+> yarn install
+
+> yarn start (obs: configurar o arquivo .env na raiz da pasta backend: copiar conteúdo do .env.example)
+
+> com a api no ar, consulte a documentação, acessando o endpoint: http://localhost:3333/api-docs/
+
+> divirta-se com as funcionalidades
+
+
+2. Acessar a pasta frontend e executar os seguintes comandos:
+> yarn install
+
+> yarn start (obs: configurar o arquivo .env na raiz da pasta frontend: copiar conteúdo do .env.example)
+
+> usuário para testes da aplicação (porém você poderá cadastrar um usuário)
+> > murilloborges@luizalabs.com
+
+> > 123456
+
+> divirta-se com as funcionalidades
