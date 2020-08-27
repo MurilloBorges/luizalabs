@@ -5,11 +5,11 @@ Com esta aplicação irei informar meu CEP e obter o nome da minha RUA, BAIRRO, 
 
 
 # Tecnologias utilizadas
-- Para o backend foi utilizado a linguagem NodeJS;
+- Para o backend foi utilizado a ferramenta NodeJS;
 
 - Para o banco de dados onde será armazenado os usuários da aplicação foi utilizado o MongoDB;
 
-- Para o frontend foi utilizado a linguagem ReactJS;
+- Para o frontend foi utilizado a ferramenta ReactJS;
 
 - Para os testes automaizados foi utilizado o framework cypress;
 
