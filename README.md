@@ -56,7 +56,7 @@ Com esta aplicação irei informar meu CEP e obter o nome da minha RUA, BAIRRO, 
 
 > > > **src** (pasta onde contém a arquitetura da api)
 
-> > > > **middlewares** (contém os middlewares da aplicação com o logger para log das requisições da api, swagger para documentaço, auth para validação de token jwt válido)
+> > > > **middlewares** (contém os middlewares da aplicação com o logger para log das requisições da api, swagger para documentação, auth para validação de token jwt válido)
 
 > > > > **views** (contém as views da aplicação como endereço que retorna o modelo "json padrão" de endereço para retorno no response da requisição de cep para status 200)
 
