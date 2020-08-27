@@ -4,10 +4,10 @@ import IconSVG from '../components/Ui/IconSVG';
 import api from '../services/api';
 import { login } from '../services/authentication';
 import { isEmpty } from '../helpers/funcoes';
-import { Redirect } from 'react-router-dom';
 
-export default function Login({ history }) {
-  const [authenticate, setAuthenticate] = useState({
+export default function SignUp({ history }) {
+  const [signUp, setSignUp] = useState({
+    nome: '',
     email: '',
     senha: '',
   })
@@ -17,19 +17,23 @@ export default function Login({ history }) {
   }, []);
 
   function handleInput({ currentTarget: { value, name } }) {
-    setAuthenticate({
-      ...authenticate,
+    setSignUp({
+      ...signUp,
       [name]: value,
     });
   }
 
   async function handleSubmit(e) {
     e.preventDefault();
-    if (isEmpty(authenticate.email) || isEmpty(authenticate.senha)) {
-      return toast.error('Preencha e-mail e senha para continuar.');
+    if (isEmpty(signUp.nome) || isEmpty(signUp.email) || isEmpty(signUp.senha)) {
+      return toast.error('Todos os campos são obrigatórios.');
     }
     try {
-      await api.post('/authenticate', { email: authenticate.email, senha: authenticate.senha }).then((res) => {
+      await api.post('/usuarios', {
+        nome: signUp.nome,
+        email: signUp.email,
+        senha: signUp.senha
+      }).then((res) => {
         login(res.data.token);
         history.push('/busca-cep');
       }).catch((error) => {
@@ -38,7 +42,7 @@ export default function Login({ history }) {
     } catch (e) {
       toast.error(`Falha na requisição: ${e}`);
     }
-  }  
+  }
 
   return (
     <div className="login-container">
@@ -49,21 +53,26 @@ export default function Login({ history }) {
           width="10rem"
           fill="#666666"
         />
-        <input type="text" autoFocus data-cy="email" name="email"
+        <input type="text" autoFocus data-cy="nome" name="nome"
+          placeholder="Digite seu nome"
+          value={signUp.nome}
+          onChange={handleInput}
+        />
+        <input type="text" data-cy="email" name="email"
           placeholder="Digite seu e-mail"
-          value={authenticate.email}
+          value={signUp.email}
           onChange={handleInput}
         />
         <input type="password" data-cy="senha" name="senha"
           placeholder="Digite sua senha"
-          value={authenticate.senha}
+          value={signUp.senha}
           onChange={handleInput}
         />
-        <button type="submit" className="btn btn-info" data-cy="entrar">Entrar</button>
-        <button type="button" className="btn btn-light" data-cy="cadastrar" onClick={() => history.push('/sign-up')}>
-          CADASTRAR
+        <button type="submit" className="btn btn-info" data-cy="cadastrar">Cadastrar</button>
+        <button type="button" className="btn btn-light" data-cy="login" onClick={() => history.push('/login')}>
+          LOGIN
         </button>
       </form>
-    </div >
+    </div>
   );
 }
