@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom';
 
 // Pages
-// import Home from '../pages/home/index';
+import Login from '../pages/Login';
 import Error from '../pages/404';
 
 export default function routes() {
@@ -18,13 +18,13 @@ export default function routes() {
           <Error />
         </Route>
 
-        {/* Home 
+        Home
         <Route path="/" exact>
-          <Redirect to="/home" />
+          <Redirect to="/login" />
         </Route>
-        <Route path="/home" exact>
-          <Home />
-        </Route>*/}
+        <Route path="/login" exact>
+          <Login />
+        </Route>
 
         {/* Página not found */}
         <Route path="*" exact>
