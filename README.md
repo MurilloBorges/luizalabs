@@ -45,6 +45,37 @@ Com esta aplicação irei informar meu CEP e obter o nome da minha RUA, BAIRRO, 
 
 - Implementado método de busca cep (exige autenticação);
 
+#### Para a arquitetura do projeto foi utilizado o seguinte contexto de pastas:
+> luizalabs (pasta pai de todo o projeto)
+
+> > backend (pasta pai do backend)
+
+> > > node_modules (pasta onde contém todas bibliotecas e dependências instaladas e utilizadas no projeto)
+
+> > > logs (pasta onde contém o log de todas as requisições feitas para a api)
+
+> > > src (pasta onde contém a arquitetura da api)
+
+> > > > middlewares
+
+> > > > views
+
+> > > > controllers
+
+> > > > models
+
+> > > > helpers
+
+> > > > database
+
+> > > > config
+
+> > > > routes.js
+
+> > > > app.js
+
+> > > > server.js
+
 
 
 # Requisitos para a execução do projeto
