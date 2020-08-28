@@ -3,6 +3,7 @@ import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
 import api from '../services/api';
 import { logout } from '../services/authentication';
+import MaskedInput from 'react-text-mask';
 import { cepMask } from '../helpers/masks';
 
 export default function BuscaCep({ history }) {
@@ -57,7 +58,7 @@ export default function BuscaCep({ history }) {
         <div className="form-row">
           <div className="form-group col-md-3">
             <label for="cep">CEP</label>
-            <input type="text" autoFocus className="form-control" id="cep" name="cep" value={endereco.cep} onChange={handleInput} />
+            <MaskedInput mask={cepMask} id="cep" guide={false} type="text" name="cep" value={endereco.cep} onChange={handleInput} className="form-control" />
           </div>
           <div className="form-group col-md-7">
             <label for="cidade">Cidade</label>
