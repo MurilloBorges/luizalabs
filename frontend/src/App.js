@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import Router from './routes';
+import IconSVG from './components/Ui/IconSVG';
 
 function App() {
   const loading = useSelector((store) => store.loading);
@@ -8,9 +9,15 @@ function App() {
   return (
     <div className="App">
       <Router />
-      { loading && (
+      {loading && (
         <div className="spinner">
-          <span className="uk-margin-small-right" uk-spinner="ratio: 2" />
+          <IconSVG
+            className="loader"
+            icon="spinner"
+            height="10rem"
+            width="10rem"
+            fill="#3498db"
+          />
         </div>
       )}
     </div>

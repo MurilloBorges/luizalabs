@@ -1,16 +1,24 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable jsx-a11y/no-autofocus */
 import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
+import { useDispatch } from 'react-redux';
 import IconSVG from '../components/Ui/IconSVG';
 import api from '../services/api';
 import { login } from '../services/authentication';
 import { isEmpty } from '../helpers/funcoes';
 
+const loading = (payload) => ({
+  type: 'LOADER', payload,
+});
+
 export default function SignUp({ history }) {
+  const dispatch = useDispatch();
   const [signUp, setSignUp] = useState({
     nome: '',
     email: '',
     senha: '',
-  })
+  });
 
   useEffect(() => {
     toast.configure();
@@ -29,10 +37,11 @@ export default function SignUp({ history }) {
       return toast.error('Todos os campos são obrigatórios.');
     }
     try {
+      dispatch(loading({ loading: true }));
       await api.post('/usuarios', {
         nome: signUp.nome,
         email: signUp.email,
-        senha: signUp.senha
+        senha: signUp.senha,
       }).then((res) => {
         toast.success('Usuário cadastrado com sucesso!');
         login(res.data.token);
@@ -41,10 +50,14 @@ export default function SignUp({ history }) {
         if (error.response.status === 400) {
           toast.info(error.response.data.error);
         }
+      }).finally(() => {
+        dispatch(loading({ loading: false }));
       });
-    } catch (e) {
-      toast.error(`Falha na requisição: ${e}`);
+    } catch (error) {
+      toast.error(`Falha na requisição: ${error}`);
     }
+
+    return true;
   }
 
   return (
@@ -56,17 +69,27 @@ export default function SignUp({ history }) {
           width="10rem"
           fill="#666666"
         />
-        <input type="text" autoFocus data-cy="nome" name="nome"
+        <input
+          type="text"
+          autoFocus
+          data-cy="nome"
+          name="nome"
           placeholder="Digite seu nome"
           value={signUp.nome}
           onChange={handleInput}
         />
-        <input type="text" data-cy="email" name="email"
+        <input
+          type="text"
+          data-cy="email"
+          name="email"
           placeholder="Digite seu e-mail"
           value={signUp.email}
           onChange={handleInput}
         />
-        <input type="password" data-cy="senha" name="senha"
+        <input
+          type="password"
+          data-cy="senha"
+          name="senha"
           placeholder="Digite sua senha"
           value={signUp.senha}
           onChange={handleInput}

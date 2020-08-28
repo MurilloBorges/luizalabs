@@ -1,3 +1,6 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/jsx-first-prop-new-line */
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import {
   BrowserRouter,
@@ -16,8 +19,8 @@ import BuscaCep from '../pages/BuscaCep';
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route {...rest}
     render={
-      props => isAuthenticated() ? (<Component {...props} />)
-        : (<Redirect to={{ pathname: "/", state: { from: props.location } }} />)
+      (props) => (isAuthenticated() ? (<Component {...props} />)
+        : (<Redirect to={{ pathname: '/', state: { from: props.location } }} />))
     }
   />
 );
