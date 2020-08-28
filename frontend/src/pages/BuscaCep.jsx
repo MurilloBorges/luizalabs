@@ -36,6 +36,7 @@ export default function BuscaCep() {
       try {
         const cep = value.replace(/\D/g, '');
         if (cep.length === 8) {
+          document.activeElement.blur();
           dispatch(loading({ loading: true }));
           await api.get(`/ceps/${cep}`).then((res) => {
             if (res.status === 200) {
