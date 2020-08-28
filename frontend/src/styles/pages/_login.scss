@@ -1,16 +1,17 @@
 .login-container {
-  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   form {
     width: 100%;
-    margin: 0 40% 0 40%;
+    margin: 10vh 40% 0 40%;
     min-width: 300px;
     display: flex;
     flex-direction: column;
-    background: #fff;
-    padding: 20px;
+    background-color: #ffffff;    
+    box-shadow: #00000022 1vw 1vw 5vw;
+    padding: 2rem;
+    border-radius: 2vw;
     input {
       margin-top: 20px;
       border: 1px solid #ddd;
@@ -25,16 +26,16 @@
       }
     }
     button {
-      margin-top: 2vh;      
+      margin-top: 2vh;
       border-radius: 4px;
       height: 48px;
-      font-size: 16px;      
-      font-weight: bold;         
-    }          
+      font-size: 16px;
+      font-weight: bold;
+    }
   }
   svg {
     height: 50%;
     width: 50%;
     margin: auto;
   }
-}    
+}

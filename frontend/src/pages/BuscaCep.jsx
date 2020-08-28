@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
-import IconSVG from '../components/Ui/IconSVG';
 import api from '../services/api';
-import { isEmpty } from '../helpers/funcoes';
 import { logout } from '../services/authentication';
+import { cepMask } from '../helpers/masks';
 
 export default function BuscaCep({ history }) {
   const [endereco, setEndereco] = useState({
@@ -19,54 +18,65 @@ export default function BuscaCep({ history }) {
     toast.configure();
   }, []);
 
-  function handleInput({ currentTarget: { value, name } }) {
+  async function handleInput({ currentTarget: { value, name } }) {
     setEndereco({
       ...endereco,
       [name]: value,
     });
-  }
 
-  async function handleSubmit(e) {
-    e.preventDefault();
-    if (isEmpty(endereco.nome) || isEmpty(endereco.email) || isEmpty(endereco.senha)) {
-      return toast.error('Todos os campos são obrigatórios.');
-    }
-    try {
-      await api.post(`/ceps/${endereco.cep}`).then((res) => {
-        history.push('/busca-cep');
-      }).catch((error) => {
-        toast.error('Usuário ou Senha Inválido.');
-      });
-    } catch (e) {
-      toast.error(`Falha na requisição: ${e}`);
+    if (name === 'cep') {
+      try {
+        const cep = value.replace(/\D/g, '');
+        if (cep.length === 8) {
+          await api.get(`/ceps/${cep}`).then((res) => {
+            if (res.status === 200) {
+              setEndereco({
+                ...endereco,
+                ...res.data,
+              });
+            }
+          }).catch((error) => {
+            console.log(error.response);
+            if ([400, 401, 404].includes(error.response.status)) {
+              toast.info(error.response.data.error);
+            }
+          });
+        }
+      } catch (e) {
+        toast.error(`Falha na requisição: ${e}`);
+      }
     }
   }
 
   return (
     <div className="operacoes-produto-container">
-      <form onSubmit={handleSubmit}>
+      <form>
         <Link to='/login' onClick={logout} className="btn btn-info" data-cy="btn-deslogar" id="deslogar">Deslogar</Link>
         <h1>Buscar CEP</h1>
         <hr />
-        <h4>Nome</h4>
-        <input type="text" autoFocus placeholder="Digite o nome" data-cy="input-nome"
-          value={endereco.neighborhood} onChange={handleInput}
-        />
-        <h4>Descrição</h4>
-        <input type="text" placeholder="Digite a descrição" data-cy="input-descricao"
-          value={endereco.street} onChange={handleInput}
-        />
-        <h4>Valor</h4>
-        <input type="text" maxLength="9" placeholder="0,00" data-cy="input-valor"
-          value={endereco.state} onChange={handleInput}
-        />
-        <div className="operacoes-produto-frames">
-          <Link to='/produtos' className="btn btn-danger"
-            id="cancelar" data-cy="btn-cancelar">Cancelar
-          </Link>
-          <button type="submit" className="btn btn-success"
-            id="salvar" data-cy="btn-salvar" onClick={handleSubmit}>Salvar
-          </button>
+        <div className="form-row">
+          <div className="form-group col-md-3">
+            <label for="cep">CEP</label>
+            <input type="text" autoFocus className="form-control" id="cep" name="cep" value={endereco.cep} onChange={handleInput} />
+          </div>
+          <div className="form-group col-md-7">
+            <label for="cidade">Cidade</label>
+            <input type="text" className="form-control" id="cidade" value={endereco.city} disabled />
+          </div>
+          <div className="form-group col-md-2">
+            <label for="estado">Estado</label>
+            <input type="text" className="form-control" id="estado" value={endereco.state} disabled />
+          </div>
+        </div>
+        <div className="form-row">
+          <div className="form-group col-md-7">
+            <label for="logradouro">Logradouro</label>
+            <input type="text" className="form-control" id="logradouro" value={endereco.street} disabled />
+          </div>
+          <div className="form-group col-md-5">
+            <label for="bairro">Bairro</label>
+            <input type="text" className="form-control" id="bairro" value={endereco.neighborhood} disabled />
+          </div>
         </div>
       </form>
     </div>
