@@ -1,9 +1,9 @@
 import { Router } from 'express';
 
-import Usuario from './controllers/Usuario';
+import Usuario from './controllers/UsuarioController';
 import authMiddleware from './middlewares/auth';
-import Authenticate from './controllers/Authenticate';
-import Endereco from './controllers/Endereco';
+import Authenticate from './controllers/AuthenticateController';
+import Endereco from './controllers/EnderecoController';
 
 const routes = new Router();
 

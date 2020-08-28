@@ -1,7 +1,7 @@
 import * as Yup from 'yup';
 import bcrypt from 'bcryptjs';
 import Usuario from '../models/Usuario';
-import { generateToken } from './Authenticate';
+import { generateToken } from './AuthenticateController';
 import { isEmpty } from '../helpers/funcoes';
 
 class UsuarioController {

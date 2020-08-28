@@ -20,17 +20,15 @@ const swaggerOptions = {
     host: 'localhost:3333',
     schemes: ['http'],
     basePath: '/',
+    consumes: ['application/json'],
+    produces: ['application/json'],
     responses: {},
     parameters: {},
-    securityDefinitions: {
-      bearerAuth: {
-        type: 'apiKey',
-        name: 'Authorization',
-        scheme: 'bearer',
-        bearerFormat: 'JWT',
-        in: 'header',
+    security: [
+      {
+        bearerAuth: [],
       },
-    },
+    ],
     tags: [
       {
         name: 'Authenticate',
@@ -53,8 +51,7 @@ const swaggerOptions = {
           summary: 'user authentication',
           operationId: 'userAuthentication',
           description: 'Here you can authenticate your user in the system',
-          produces: ['application/json'],
-          consumes: ['application/json'],
+          security: [],
           parameters: [
             {
               in: 'body',
@@ -89,8 +86,7 @@ const swaggerOptions = {
           summary: 'insert user',
           operationId: 'insertUser',
           description: 'Here you can register a new user in the system',
-          produces: ['application/json'],
-          consumes: ['application/json'],
+          security: [],
           parameters: [
             {
               in: 'body',
@@ -132,7 +128,7 @@ const swaggerOptions = {
           operationId: 'searchUsers',
           description:
             'When making a request, you can get all users registered in the system',
-          produces: ['application/json'],
+          security: [],
           responses: {
             200: {
               description: 'users were obtained',
@@ -154,7 +150,7 @@ const swaggerOptions = {
           operationId: 'searchUser',
           description:
             'By passing a valid ID, you can obtain the corresponding user',
-          produces: ['application/json'],
+          security: [],
           parameters: [
             {
               name: 'id',
@@ -185,8 +181,6 @@ const swaggerOptions = {
           operationId: 'changeUser',
           description:
             'By passing a valid ID, you can change the corresponding user',
-          produces: ['application/json'],
-          consumes: ['application/json'],
           parameters: [
             {
               name: 'id',
@@ -245,7 +239,6 @@ const swaggerOptions = {
           operationId: 'deleteUser',
           description:
             'By passing a valid ID, you can delete the corresponding user',
-          produces: ['application/json'],
           parameters: [
             {
               name: 'id',
@@ -278,7 +271,6 @@ const swaggerOptions = {
           operationId: 'searchCEP',
           description:
             'When you pass a valid zip code, you can obtain the corresponding address',
-          produces: ['application/json'],
           parameters: [
             {
               name: 'cep',
@@ -339,6 +331,14 @@ const swaggerOptions = {
             },
           },
         },
+      },
+    },
+    securityDefinitions: {
+      bearerAuth: {
+        description: 'JWT Token | usar: Bearer {token}',
+        type: 'apiKey',
+        name: 'Authorization',
+        in: 'header',
       },
     },
     definitions: {
