@@ -71,31 +71,69 @@ export default function BuscaCep() {
 
     <div className="operacoes-produto-container">
       <form>
-        <Link to="/login" onClick={logout} className="btn btn-info" data-cy="btn-deslogar" id="deslogar">Deslogar</Link>
+        <Link to="/login" onClick={logout} className="btn btn-info" data-cy="deslogar" id="deslogar">Deslogar</Link>
         <h1>Buscar CEP</h1>
         <hr />
         <div className="form-row">
           <div className="form-group col-md-3">
             <label htmlFor="cep">CEP</label>
-            <MaskedInput mask={cepMask} id="cep" guide={false} type="text" name="cep" value={endereco.cep} onChange={handleInput} className="form-control" />
+            <MaskedInput
+              mask={cepMask}
+              id="cep"
+              guide={false}
+              type="text"
+              name="cep"
+              value={endereco.cep}
+              onChange={handleInput}
+              className="form-control"
+              data-cy="cep"
+            />
           </div>
           <div className="form-group col-md-7">
             <label htmlFor="cidade">Cidade</label>
-            <input type="text" className="form-control" id="cidade" value={endereco.city} disabled />
+            <input
+              type="text"
+              className="form-control"
+              id="cidade"
+              value={endereco.city}
+              disabled
+              data-cy="cidade"
+            />
           </div>
           <div className="form-group col-md-2">
             <label htmlFor="estado">Estado</label>
-            <input type="text" className="form-control" id="estado" value={endereco.state} disabled />
+            <input
+              type="text"
+              className="form-control"
+              id="estado"
+              value={endereco.state}
+              disabled
+              data-cy="estado"
+            />
           </div>
         </div>
         <div className="form-row">
           <div className="form-group col-md-7">
             <label htmlFor="logradouro">Logradouro</label>
-            <input type="text" className="form-control" id="logradouro" value={endereco.street} disabled />
+            <input
+              type="text"
+              className="form-control"
+              id="logradouro"
+              value={endereco.street}
+              disabled
+              data-cy="logradouro"
+            />
           </div>
           <div className="form-group col-md-5">
             <label htmlFor="bairro">Bairro</label>
-            <input type="text" className="form-control" id="bairro" value={endereco.neighborhood} disabled />
+            <input
+              type="text"
+              className="form-control"
+              id="bairro"
+              value={endereco.neighborhood}
+              disabled
+              data-cy="bairro"
+            />
           </div>
         </div>
       </form>
