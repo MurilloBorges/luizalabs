@@ -1,1 +1,8 @@
-{}
+{
+  "baseUrl": "http://localhost:3333",
+  "retries": {
+    "runMode": 2,
+    "openMode": 2
+  }
+}
+
