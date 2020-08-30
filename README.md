@@ -114,3 +114,17 @@ Com esta aplicação irei informar meu CEP e obter o nome da minha RUA, BAIRRO, 
 > > 123456
 
 > divirta-se com as funcionalidades
+
+
+## O que acontece ao acessar a url do site https://www.netshoes.com.br/ no browser
+- Site http estático que está servido por algum servidor web html estático podendo ser: apache, nginx, glassfish, etc;
+
+- O servidor está hospedando a aplicação e escutando chamadas em determinas portas;
+
+- Para acessar a aplicação nesse servidor a url deve ser traduzida para o seu endereço (ip:porta) ou seja resolver o dns;
+
+- É enviada requisições ao endereço para buscar o que será exibido (nessa etapa é realizada verificações de segurança, certificado ssl, load balancer, servidor de proxy reverso, validação de cors, etc.), verifica onde se destina o endereço e encaminha a solicitação pela rede interna do servidor estático onde geralmente passa por um servidor de proxy reverso e é redirecionado ao servidor especifico ao qual realmente está a aplicação (recebe e encaminha "só o servidor de proxy conhece");
+
+- O servidor cria broadcast com o site "cliente";
+
+- O cliente executa o diagrama de sequência do site ou seja, define os inputs de entrada e saída da aplicação;
