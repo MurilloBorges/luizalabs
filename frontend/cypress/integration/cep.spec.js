@@ -19,13 +19,13 @@ describe('Action busca CEP', () => {
     cy.log('Testando o CEP válido');
     cy.buscaCEP(cep.valid);
 
-    cy.log('Testando o CEP válido por troca do último digito da direita por 0"');
+    cy.log('Testando o CEP válido por troca do último digito da direita por 0');
     cy.buscaCEP(cep.validByReplace);
 
     cy.log('Testando o CEP inválido');
     cy.buscaCEP(cep.invalid);
 
-    cy.log('Testando o CEP válido por trocar do último digito da direita por 0');
+    cy.log('Testando o CEP inválido por trocar do último digito da direita por 0');
     cy.buscaCEP(cep.invalidByReplace);
   });
 

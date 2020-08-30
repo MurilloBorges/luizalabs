@@ -1,5 +1,7 @@
 {
-  "nome": "Murillo Borges",
-  "email": "murilloborges@luizalabs.com",
-  "senha": "123456"
+  "_id": "",
+  "nome": "Murillo Borges Teste",
+  "email": "murilloborgesteste@luizalabs.com",
+  "senha": "123456",
+  "token": ""
 }
