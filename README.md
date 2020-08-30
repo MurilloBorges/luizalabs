@@ -106,6 +106,8 @@ Com esta aplicação irei informar meu CEP e obter o nome da minha RUA, BAIRRO, 
 
 > yarn start (obs: configurar o arquivo .env na raiz da pasta frontend: copiar conteúdo do .env.example)
 
+> yarn cy:open (para executar os testes e2e no frontend) | (obs: para linux caso dê problema de permissão executar o comando "/home sudo chmod -R 777 murillo/.config/Cypress")
+
 > usuário para testes da aplicação (porém você poderá cadastrar um usuário)
 > > murilloborges@luizalabs.com
 
