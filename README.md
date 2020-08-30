@@ -50,6 +50,18 @@ Com esta aplicação irei informar meu CEP e obter o nome da minha RUA, BAIRRO, 
 
 > > **backend** (pasta pai do backend)
 
+> > > **cypress.json** (arquivo de configurações globais do cypress. Ex.: criar variáveis globais, definir resolução do navegador, setar uma URL padrão, entre outros.)
+
+> > > **cypress** (pasta onde contém todo código e arquitetura cypress)
+
+> > > > **fixtures** (pasta que oferecem configurações avançadas, sendo elas criações de arquivos json para uso global de dados nos testes exemplo cep.json, usuario.json)
+
+> > > > **integration** (pasta onde colocamos os nossos arquivos com os cenários de teste escritos no formato BDD (Desenvolvimento Guiado por Comportamento), sendo eles happy-path.spec.js "testes para realização do caminho feliz da aplicação", cep.spec.js "testes mais a fundo na funcionalidade de busca cep")
+
+> > > > **plugins/index.js** (este arquivo é destinado para configuração de plugins. Utilizamos ele ao configurar o Cucumber.)
+
+> > > > **support** (pasta onde colocamos os steps, os scripts e o mapeamento de elementos de nossos testes, como no arquivo commands.js em que são criadas funções de uso global, no arquivo index.d.ts podemos criar intellisense das funções construidas no commands.js)
+
 > > > **node_modules** (pasta onde contém todas bibliotecas e dependências instaladas e utilizadas no projeto)
 
 > > > **logs** (pasta onde contém o log de todas as requisições feitas para a api)
@@ -95,6 +107,8 @@ Com esta aplicação irei informar meu CEP e obter o nome da minha RUA, BAIRRO, 
 > yarn install
 
 > yarn start (obs: configurar o arquivo .env na raiz da pasta backend: copiar conteúdo do .env.example)
+
+> yarn cy:open (para executar os testes de api no backend) | (obs: para linux caso dê problema de permissão executar o comando "/home sudo chmod -R 777 murillo/.config/Cypress")
 
 > com a api no ar, consulte a documentação, acessando o endpoint: http://localhost:3333/api-docs/
 
