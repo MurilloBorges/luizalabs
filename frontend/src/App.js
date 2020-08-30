@@ -10,7 +10,7 @@ function App() {
     <div className="App">
       <Router />
       {loading && (
-        <div className="spinner">
+        <div className="spinner" data-cy="spinner">
           <IconSVG
             className="loader"
             icon="spinner"

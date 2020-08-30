@@ -1,6 +1,34 @@
 {
-  "valid": "15041530",
-  "validByReplace": "15041222",
-  "invalid": "99999999",
-  "invalidByReplace": "15000000"
+  "valid": {
+    "cep": "15041530",
+    "cepRetorno": "15041530",
+    "estado": "SP",
+    "cidade": "São José do Rio Preto",
+    "bairro": "Jardim Residencial Etemp",
+    "logradouro": "Rua Archimedes Ary Beolchi"
+  },
+  "validByReplace": {
+    "cep": "15041222",
+    "cepRetorno": "15041220",
+    "estado": "SP",
+    "cidade": "São José do Rio Preto",
+    "bairro": "Jardim Alice",
+    "logradouro": "Rua Erci Nicolau Martins"
+  },
+  "invalid": {
+    "cep": "99999999",
+    "cepRetorno": "99999999",
+    "estado": "",
+    "cidade": "",
+    "bairro": "",
+    "logradouro": ""
+  },
+  "invalidByReplace": {
+    "cep": "15000000",
+    "cepRetorno": "00000000",
+    "estado": "",
+    "cidade": "",
+    "bairro": "",
+    "logradouro": ""
+  }
 }

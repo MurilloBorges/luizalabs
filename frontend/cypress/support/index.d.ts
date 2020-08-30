@@ -58,6 +58,13 @@ declare namespace Cypress {
 		 * @example
 		 * cy.login('user name', 'user password')
 		 */
-		login(userName: string, password: string): Chainable<any>
+    login(userName: string, password: string): Chainable<any>
+
+    /**
+		 * Use to search and test the zip code
+		 * @example
+		 * cy.buscaCEP(cep)
+		 */
+		buscaCEP(cep: object): Chainable<any>
 	}
 }

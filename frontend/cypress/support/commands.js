@@ -21,3 +21,16 @@ Cypress.Commands.add('login', (userName, password) => {
   cy.dataCy('senha').type(password).should('have.value', password);
   cy.dataCy('entrar').click();
 });
+
+Cypress.Commands.add('buscaCEP', (cep) => {
+  cy.dataCyType('cep', cep.cep, `${cep.cep.substring(0, 5)}-${cep.cep.slice(-3)}`);
+  cy.dataCy('spinner').then(($loader) => {
+    if (!$loader) {
+      cy.dataCy('cep').should('have.value', `${cep.cepRetorno.substring(0, 5)}-${cep.cepRetorno.slice(-3)}`);
+      cy.dataCy('cidade').should('have.value', cep.cidade);
+      cy.dataCy('estado').should('have.value', cep.estado);
+      cy.dataCy('logradouro').should('have.value', cep.logradouro);
+      cy.dataCy('bairro').should('have.value', cep.bairro);
+    }
+  });
+});

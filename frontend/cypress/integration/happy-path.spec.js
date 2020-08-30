@@ -2,55 +2,26 @@
 /// <reference types="Cypress" />
 /// <reference path="../support/commands.js" />
 
-describe('gerando cotação e adesão com sucesso', () => {
+describe('Action happy path application', () => {
   beforeEach(() => {
-    cy.fixture('users.json').as('users');
+    cy.fixture('usuario.json').as('usuario');
+    cy.fixture('cep.json').as('cep');
   });
 
-  it('entrando na homepage', () => {
-    cy.entrandoHome();
+  it('Realizando teste de autenticação', function () {
+    cy.visit('/login');
+    const { usuario } = this;
+    cy.login(usuario.email, usuario.senha);
   });
 
-  it('fazendo login com e-mail já cadastrado', () => {
-    const user = this.users;
-    cy.login(user);
+  it('Realizando testes na funcionalidade de busca CEP', function () {
+    const { cep } = this;
+    cy.log('Testando o CEP válido');
+    cy.buscaCEP(cep.valid);
   });
 
-  it('entrando na página da cotação', () => {
-    const user = this.users;
-    cy.entraCotacao(user);
-  });
-
-  it('preenchendo campos e gerando cotação', () => {
-    const user = this.users;
-    cy.geraCotacao(user);
-  });
-
-  it('escolhendo plano', () => {
-    const user = this.users;
-    cy.escolhePlano(user);
-  });
-
-  it('completando dados da fase 1 da adesão', function () {
-    const user = this.users;
-    cy.confirmaDados(user);
-  });
-
-  it('preenchendo formulário titular e dependente na fase 2 da adesão', function () {
-    const user = this.users;
-    cy.preencheForms(user);
-  });
-
-  it('preenchendo declaração de saúde titular e dependente na fase 3 da adesão', () => {
-    cy.declaraSaude();
-  });
-
-  it('optando por enviar documentos em outro momento, fase 4 da adesão', () => {
-    cy.envioDocumentos();
-  });
-
-  it('lendo resumo da proposta e confirmando solicitação na fase 5 da adesão', function () {
-    const user = this.users;
-    cy.aceitaCondicoes(user);
+  it('Realizando teste de deslogar o usuário', () => {
+    cy.log('Testando o deslogar do usuário');
+    cy.dataCy('deslogar').click({ force: true });
   });
 });
