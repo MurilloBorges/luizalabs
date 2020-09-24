@@ -130,6 +130,78 @@ Com esta aplicação irei informar meu CEP e obter o nome da minha RUA, BAIRRO, 
 > divirta-se com as funcionalidades
 
 
+## Executando o projeto através de docker run
+1. Executar os seguintes comandos na pasta backend ou frontend
+> Criar uma imagem
+
+> > sudo docker build -t nodejs .
+
+> Listando as imagens
+
+> > sudo docker images
+
+> Remover imagens paradas
+
+> > sudo docker image prune
+
+> Criar um container com a imagem criada acima
+
+> > sudo docker run --name nodejs -p 3333:3333 -d nodejs
+
+> Ativar um container
+
+> > sudo docker start nodejs
+
+> Estatisticas do container
+
+> > sudo docker stats nodejs
+
+> Listando o container
+
+> > sudo docker ps -a
+
+> Parar o container
+
+> > sudo docker stop nodejs
+
+> Finalizar o container
+
+> > sudo docker kill nodejs
+
+> Remover containers parados
+
+> > sudo docker container prune
+
+> Ver log do container
+
+> > sudo docker logs ${id container}
+
+
+## Executando o projeto através de docker-compose
+1. Executar os seguintes comandos
+> Subir o ambiente mongo e server
+
+> > sudo docker-compose up
+
+> Derrubar o ambiente
+
+> > ctrl + c
+
+
+# Referências
+> [Documentação docker](https://www.digitalocean.com/community/tutorials/como-construir-uma-aplicacao-node-js-com-o-docker-pt
+ "Clique aqui para ver a documentação!")
+
+> [Documentação docker](https://www.hostinger.com.br/tutoriais/container-docker/
+ "Clique aqui para ver a documentação!")
+
+> [Comandos docker](https://woliveiras.com.br/posts/comandos-mais-utilizados-no-docker/
+ "Clique aqui para ver os comandos!")
+
+> [Documentação docker](https://docs.docker.com/config/containers/container-networking/
+ "Clique aqui para ver a documentação!")
+
+
 ## O que acontece ao acessar a url do site https://www.netshoes.com.br/ no browser
 - Site http estático que está servido por algum servidor web html estático podendo ser: apache, nginx, glassfish, etc;
 

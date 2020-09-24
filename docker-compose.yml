@@ -1,0 +1,27 @@
+version: "3"
+
+services:
+  react: # nome do primeiro serviço referente a FRONTEND usando React
+    container_name: reactjs
+    build: "./frontend" # especificando o diretório do DockerFile
+    command: yarn start
+    ports:
+      - "3000:3000" # especificando o mapeamento da porta da máquina local com a do container docker
+
+  server:
+    container_name: nodejs
+    build: "./backend" # especificando o diretório do DockerFile
+    command: yarn start # comando para iniciar o serviço referente ao servidor
+    ports:
+      - "3333:3333" # especificando o mapeamento da porta da máquina local com a do container docker
+    volumes:
+      - ./home/node/app # espelhando todo o conteúdo do backend no docker excepto aqueles arquivos e pastas que constam no .dockerignore
+    depends_on:
+      - mongo # definindo a dependência em que o 'mongo' deve ser inicializado antes do 'node'
+    links:
+      - mongo
+  mongo:
+    image: "mongo"
+    container_name: mongodb
+    ports:
+      - "27017:27017"
