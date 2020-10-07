@@ -187,6 +187,8 @@ Com esta aplicação irei informar meu CEP e obter o nome da minha RUA, BAIRRO, 
 
 > > ctrl + c
 
+> > sudo docker-compose down
+
 
 # Referências
 > [Documentação docker](https://www.digitalocean.com/community/tutorials/como-construir-uma-aplicacao-node-js-com-o-docker-pt

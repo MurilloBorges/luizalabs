@@ -3,6 +3,7 @@ version: "3"
 services:
   react: # nome do primeiro serviço referente a FRONTEND usando React
     container_name: reactjs
+    restart: always
     build: "./frontend" # especificando o diretório do DockerFile
     command: yarn start
     ports:
@@ -10,6 +11,7 @@ services:
 
   server:
     container_name: nodejs
+    restart: always
     build: "./backend" # especificando o diretório do DockerFile
     command: yarn start # comando para iniciar o serviço referente ao servidor
     ports:
@@ -20,8 +22,19 @@ services:
       - mongo # definindo a dependência em que o 'mongo' deve ser inicializado antes do 'node'
     links:
       - mongo
+    working_dir: /home/node/app
+    logging:
+      driver: 'json-file'
+      options:
+        max-size: '10m'
+        max-file: '5'
   mongo:
     image: "mongo"
     container_name: mongodb
+    restart: always
     ports:
       - "27017:27017"
+    environment:
+      MONGO_INITDB_DATABASE: ${DB_NAME}
+      MONGO_INITDB_ROOT_USERNAME: ${DB_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${DB_PASS}
